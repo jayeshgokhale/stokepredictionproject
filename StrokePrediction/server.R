@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(plotly)
 source("getDF.R")
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -27,5 +28,14 @@ shinyServer(function(input, output) {
      coefs
     }
     )
-
+    
+    output$xyScatter <- renderPlotly(
+        {
+            mytext <- paste0("myplot <- plot_ly(data=df,x=~",input$scatterplot_predictor_x,
+                             ",y=~",input$scatterplot_predictor_y,",color=~",input$scatterplot_predictor_color,",colors='Dark2')")
+            eval(parse(text=mytext))
+            myplot
+        }
+    )
+    
 })

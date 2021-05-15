@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(plotly)
 source("getDF.R")
 
 
@@ -15,7 +16,7 @@ source("getDF.R")
 shinyUI(fluidPage(
 
     # Application title
-    titlePanel("Stroke Prediction through Logistic Regression Model"),
+    titlePanel("Stroke Prediction Dataset Analysis"),
 
     # Sidebar with a slider input for number of bins
     sidebarLayout(
@@ -24,22 +25,28 @@ shinyUI(fluidPage(
                                choiceNames = cat.vars
                                    ,
                                choiceValues = cat.vars
+                               ,selected = "heart_disease"
                                    ),
             checkboxGroupInput("num_predictors", "Choose Numeric Predictors:",
                                choiceNames = num.vars
                                ,
                                choiceValues = num.vars
+                               ,selected = "age"
             ),
-            selectInput("scatterplot_predictor_x","Choose a variable for Scatter Plot (X)",num.vars),
-            selectInput("scatterplot_predictor_y","Choose a variable for Scatter Plot (Y)",num.vars),
+            selectInput("scatterplot_predictor_x","Choose a variable for Scatter Plot (X)",num.vars,selected="age"),
+            selectInput("scatterplot_predictor_y","Choose a variable for Scatter Plot (Y)",num.vars,selected="bmi"),
+            selectInput("scatterplot_predictor_color","Choose a Color variable for Scatter Plot",c(cat.vars,"stroke"),selected="stroke"),
             selectInput("boxplot_predictor","Choose a variable for Box Plot",cat.vars),
-            selectInput("colorbox_predictor","Choose a variable for Fill Color in Box Plot",cat.vars),
-            submitButton()
+            selectInput("colorbox_predictor","Choose a variable for Fill Color in Box Plot",cat.vars)
+            #,submitButton()
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-            tableOutput("modelSummary")
+            titlePanel("Logit Model Summary"),
+            tableOutput("modelSummary"),
+            titlePanel("Scatter Plot for Numeric Variables"),
+            plotlyOutput("xyScatter")
         )
     )
 ))
