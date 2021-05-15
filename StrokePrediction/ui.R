@@ -16,8 +16,10 @@ source("getDF.R")
 shinyUI(fluidPage(
 
     # Application title
-    titlePanel("Stroke Prediction Dataset Analysis"),
-
+    titlePanel( "Stroke Prediction Dataset Analysis",windowTitle = "Stroke Prediction"),
+    tags$a(href='https://jayeshgokhale.shinyapps.io/strokePredictionAnalysis/', target='blank'
+           , 'User Documentation'),
+    
     # Sidebar with a slider input for number of bins
     sidebarLayout(
         sidebarPanel(
@@ -33,20 +35,21 @@ shinyUI(fluidPage(
                                choiceValues = num.vars
                                ,selected = "age"
             ),
+            #sliderInput("prediction_threshold","Enter a value for threshold",0,1,0.25),
             selectInput("scatterplot_predictor_x","Choose a variable for Scatter Plot (X)",num.vars,selected="age"),
             selectInput("scatterplot_predictor_y","Choose a variable for Scatter Plot (Y)",num.vars,selected="bmi"),
             selectInput("scatterplot_predictor_color","Choose a Color variable for Scatter Plot",c(cat.vars,"stroke"),selected="stroke"),
-            selectInput("boxplot_predictor","Choose a variable for Box Plot",cat.vars),
-            selectInput("colorbox_predictor","Choose a variable for Fill Color in Box Plot",cat.vars)
-            #,submitButton()
+            selectInput("color_palette","Choose a Color Palette",palette.names,selected="Accent"),
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-            titlePanel("Logit Model Summary"),
+            h3("Logit Model Summary (Ascending Order of P Value)"),
             tableOutput("modelSummary"),
-            titlePanel("Scatter Plot for Numeric Variables"),
-            plotlyOutput("xyScatter")
-        )
+            #h3("Validation Metrics"),
+            #textOutput("validationMetrics"),
+            h3("Scatter Plot (Size of Bubble indicates Risk of Stroke)"),
+            plotlyOutput("xyScatter")        
+            )
     )
 ))

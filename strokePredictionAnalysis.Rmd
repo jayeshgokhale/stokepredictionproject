@@ -1,0 +1,33 @@
+---
+title: "Stroke Prediction Analysis"
+author: "Jayesh Gokhale"
+date: "5/16/2021"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## About the Application
+
+- This application uses the [Kaggle Dataset on Stroke Prediction](https://www.kaggle.com/fedesoriano/stroke-prediction-dataset) posted by fedesoriano
+
+- The objective of this application is not to make predictions but to provide a quick means of trial and error
+
+- The user can quickly select the categorical variables and numeric variables which the user wants to include in the model. Accordingly a basic logistic regression model will be built.
+
+- All the coefficient values including the intercept will be displayed in the right pane in the **increasing order of p-value**
+
+- The significant p-values will be highlighted by * marks
+
+- Apart from this, a scatter plot is provided between numeric variables. User can make own choice of X or Y numeric variable.
+
+- Now it is not easy/possible to visualize more than 2 dimensions. Hence there is a provision to show any third categorical variable by a different colour.
+
+- Apart from that, our variable of interest viz. whether the person was affected by Heart Stroke or not is always shown by the size of Bubble.
+
+*Note: That it may become at times difficult to visualize and hence another option is provided to choose the color palette*
+
