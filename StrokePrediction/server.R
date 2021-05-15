@@ -25,16 +25,27 @@ shinyServer(function(input, output) {
                                     ,ifelse(coefs$'Pr(>|z|)' < 0.01,"**"
                                             ,ifelse(coefs$'Pr(>|z|)' < 0.05,"*","")))
      coefs$predictor <- rownames(coefs)
+     for (my.cat.var in input$cat_predictors)
+     {
+         my.replacement <- paste0(my.cat.var,":")
+         coefs$predictor <- gsub(my.cat.var,my.replacement,coefs$predictor)
+     }
      coefs
     }
     )
     
     output$xyScatter <- renderPlotly(
         {
-            mytext <- paste0("myplot <- plot_ly(data=df,x=~",input$scatterplot_predictor_x,
-                             ",y=~",input$scatterplot_predictor_y,",color=~",input$scatterplot_predictor_color,",colors='Dark2')")
+            mytext <- paste0("myplot <- plot_ly(data=df,type='scatter', mode = 'markers',x=~",input$scatterplot_predictor_x,
+                             ",y=~",input$scatterplot_predictor_y,",size = ~size_stroke,
+                             opacity = 1,marker = list(line = list(
+        color = 'rgb(0, 0, 0)',
+        width = 1
+      )),
+                             color=~",input$scatterplot_predictor_color,",colors='",input$color_palette,"')")
+            mytext <- paste0(mytext, " %>% layout(legend=list(title=list(text='<b> ",input$scatterplot_predictor_color," </b>')))")
             eval(parse(text=mytext))
-            myplot
+            myplot 
         }
     )
     

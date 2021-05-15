@@ -36,16 +36,14 @@ shinyUI(fluidPage(
             selectInput("scatterplot_predictor_x","Choose a variable for Scatter Plot (X)",num.vars,selected="age"),
             selectInput("scatterplot_predictor_y","Choose a variable for Scatter Plot (Y)",num.vars,selected="bmi"),
             selectInput("scatterplot_predictor_color","Choose a Color variable for Scatter Plot",c(cat.vars,"stroke"),selected="stroke"),
-            selectInput("boxplot_predictor","Choose a variable for Box Plot",cat.vars),
-            selectInput("colorbox_predictor","Choose a variable for Fill Color in Box Plot",cat.vars)
-            #,submitButton()
+            selectInput("color_palette","Choose a Color Palette",palette.names,selected="Accent"),
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-            titlePanel("Logit Model Summary"),
+            titlePanel("Logit Model Summary (Ascending Order of P Value)"),
             tableOutput("modelSummary"),
-            titlePanel("Scatter Plot for Numeric Variables"),
+            titlePanel("Scatter Plot (Size of Bubble indicates Risk of Stroke)"),
             plotlyOutput("xyScatter")
         )
     )
