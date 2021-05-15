@@ -8,19 +8,24 @@
 #
 
 library(shiny)
-
+source("getDF.R")
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
+    
 
-    output$distPlot <- renderPlot({
-
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
-
-    })
+    output$modelSummary <- renderTable({
+     all.vars <- c(input$cat_predictors,input$num_predictors)
+     if (length(all.vars) == 0) stop("Cannot build model")
+     mytext <- paste0("lm.df <- glm(stroke~",paste(all.vars,collapse="+"),",data=df,family='binomial')")
+     eval(parse(text=mytext))
+     coefs <- as.data.frame(summary(lm.df)$coef)
+     coefs <- coefs[order(coefs$'Pr(>|z|)'),]
+     coefs$is_significant <- ifelse(coefs$'Pr(>|z|)' < 0.001,"***"
+                                    ,ifelse(coefs$'Pr(>|z|)' < 0.01,"**"
+                                            ,ifelse(coefs$'Pr(>|z|)' < 0.05,"*","")))
+     coefs$predictor <- rownames(coefs)
+     coefs
+    }
+    )
 
 })

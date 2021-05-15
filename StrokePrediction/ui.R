@@ -8,26 +8,38 @@
 #
 
 library(shiny)
+source("getDF.R")
+
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
+    titlePanel("Stroke Prediction through Logistic Regression Model"),
 
     # Sidebar with a slider input for number of bins
     sidebarLayout(
         sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+            checkboxGroupInput("cat_predictors", "Choose Categorical Predictors:",
+                               choiceNames = cat.vars
+                                   ,
+                               choiceValues = cat.vars
+                                   ),
+            checkboxGroupInput("num_predictors", "Choose Numeric Predictors:",
+                               choiceNames = num.vars
+                               ,
+                               choiceValues = num.vars
+            ),
+            selectInput("scatterplot_predictor_x","Choose a variable for Scatter Plot (X)",num.vars),
+            selectInput("scatterplot_predictor_y","Choose a variable for Scatter Plot (Y)",num.vars),
+            selectInput("boxplot_predictor","Choose a variable for Box Plot",cat.vars),
+            selectInput("colorbox_predictor","Choose a variable for Fill Color in Box Plot",cat.vars),
+            submitButton()
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-            plotOutput("distPlot")
+            tableOutput("modelSummary")
         )
     )
 ))

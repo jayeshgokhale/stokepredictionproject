@@ -1,0 +1,13 @@
+name: StrokePrediction
+title: StrokePrediction
+username:
+account: jayeshgokhale
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4134830
+bundleId: 4600668
+url: https://jayeshgokhale.shinyapps.io/StrokePrediction/
+when: 1621059725.97007
+lastSyncTime: 1621059725.97007
+asMultiple: FALSE
+asStatic: FALSE
