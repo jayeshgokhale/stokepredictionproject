@@ -5,9 +5,9 @@ account: jayeshgokhale
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4134830
-bundleId: 4601190
+bundleId: 4603342
 url: https://jayeshgokhale.shinyapps.io/StrokePrediction/
-when: 1621076499.69944
-lastSyncTime: 1621076499.69944
+when: 1621155182.41728
+lastSyncTime: 1621155182.41728
 asMultiple: FALSE
 asStatic: FALSE

@@ -17,8 +17,10 @@ shinyUI(fluidPage(
 
     # Application title
     titlePanel( "Stroke Prediction Dataset Analysis",windowTitle = "Stroke Prediction"),
+    #text("Hello"),
+    
     tags$a(href='https://jayeshgokhale.shinyapps.io/strokePredictionAnalysis/', target='blank'
-           , 'User Documentation'),
+           , 'User Documentation (Link to Internal Shiny Web Page)'),
     
     # Sidebar with a slider input for number of bins
     sidebarLayout(
@@ -45,8 +47,9 @@ shinyUI(fluidPage(
             h3("Logit Model Summary (Ascending Order of P Value)"),
             tableOutput("modelSummary"),
             h3("Scatter Plot (Size of Bubble indicates Risk of Stroke)"),
-            plotlyOutput("xyScatter")        
-            )
-        )
+            plotlyOutput("xyScatter")
+            ),
+        
+    )
     )
 )
