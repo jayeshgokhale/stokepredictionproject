@@ -27,3 +27,5 @@ trainIndex = createDataPartition(df$stroke, p = 0.8,list=FALSE)
 df.train = df[trainIndex,]
 df.test = df[-trainIndex,]
 
+num.vars <- num.vars[!(num.vars %in% "size_stroke")]
+palette.names <- rownames(brewer.pal.info)

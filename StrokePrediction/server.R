@@ -69,7 +69,7 @@ shinyServer(function(input, output) {
     
     output$xyScatter <- renderPlotly(
         {
-            mytext <- paste0("myplot <- plot_ly(data=df.train,type='scatter', mode = 'markers',x=~",input$scatterplot_predictor_x,
+            mytext <- paste0("myplot <- plot_ly(data=df,type='scatter', mode = 'markers',x=~",input$scatterplot_predictor_x,
                              ",y=~",input$scatterplot_predictor_y,",size = ~size_stroke,
                              opacity = 1,marker = list(line = list(
         color = 'rgb(0, 0, 0)',

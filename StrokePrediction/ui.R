@@ -35,21 +35,18 @@ shinyUI(fluidPage(
                                choiceValues = num.vars
                                ,selected = "age"
             ),
-            #sliderInput("prediction_threshold","Enter a value for threshold",0,1,0.25),
             selectInput("scatterplot_predictor_x","Choose a variable for Scatter Plot (X)",num.vars,selected="age"),
             selectInput("scatterplot_predictor_y","Choose a variable for Scatter Plot (Y)",num.vars,selected="bmi"),
             selectInput("scatterplot_predictor_color","Choose a Color variable for Scatter Plot",c(cat.vars,"stroke"),selected="stroke"),
             selectInput("color_palette","Choose a Color Palette",palette.names,selected="Accent"),
         ),
 
-        # Show a plot of the generated distribution
         mainPanel(
             h3("Logit Model Summary (Ascending Order of P Value)"),
             tableOutput("modelSummary"),
-            #h3("Validation Metrics"),
-            #textOutput("validationMetrics"),
             h3("Scatter Plot (Size of Bubble indicates Risk of Stroke)"),
             plotlyOutput("xyScatter")        
             )
+        )
     )
-))
+)
